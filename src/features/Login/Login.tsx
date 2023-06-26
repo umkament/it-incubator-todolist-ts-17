@@ -9,7 +9,6 @@ import { Button, Checkbox, FormControl, FormControlLabel, FormGroup, FormLabel, 
 
 export const Login = () => {
   const dispatch = useAppDispatch();
-
   const isLoggedIn = useSelector<AppRootStateType, boolean>((state) => state.auth.isLoggedIn);
 
   const formik = useFormik({
