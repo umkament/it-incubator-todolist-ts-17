@@ -1,8 +1,8 @@
-import { todolistsAPI, TodolistType } from "api/todolists-api";
+import { todolistsAPI, TodolistType } from "common/api/todolists-api";
 import { RequestStatusType, setAppStatus } from "app/app-reducer";
-import { handleServerNetworkError } from "utils/error-utils";
 import { AppThunk } from "app/store";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
+import { handleServerNetworkError } from "common/utils/handle-server-app-error";
 
 const slice = createSlice({
   name: "todolists",

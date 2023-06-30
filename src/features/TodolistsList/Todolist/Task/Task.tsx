@@ -2,7 +2,7 @@ import React, { ChangeEvent, useCallback } from "react";
 import { Checkbox, IconButton } from "@mui/material";
 import { Delete } from "@mui/icons-material";
 import { EditableSpan } from "components/EditableSpan/EditableSpan";
-import { TaskStatuses, TaskType } from "api/todolists-api";
+import { TaskStatuses, TaskType } from "common/api/todolists-api";
 
 type TaskPropsType = {
   task: TaskType;

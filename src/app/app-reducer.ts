@@ -1,5 +1,5 @@
 import { Dispatch } from "redux";
-import { authAPI } from "api/todolists-api";
+import { authAPI } from "common/api/todolists-api";
 import { setIsLoggedIn } from "features/Login/auth-reducer";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 export type AppInitialStateType = typeof initialState;
@@ -26,6 +26,7 @@ const slice = createSlice({
 });
 
 export const appReducer = slice.reducer;
+export const appActions = slice.actions;
 
 export const setAppError = slice.actions.setAppError;
 export const setAppStatus = slice.actions.setAppStatus;
