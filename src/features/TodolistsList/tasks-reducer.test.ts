@@ -1,6 +1,6 @@
 import { tasksReducer, TasksStateType, tasksThunks } from "./tasks-reducer";
 
-import { todolistsActions } from "./todolists-reducer";
+import { todolistsThunks } from "./todolists-reducer";
 import { TaskPriorities, TaskStatuses } from "common/enum";
 
 let startState: TasksStateType = {};
@@ -147,14 +147,18 @@ test("title of specified task should be changed", () => {
   expect(endState["todolistId2"][0].title).toBe("bread");
 });
 test("new array should be added when new todolist is added", () => {
-  const action = todolistsActions.addTodolist({
-    todolist: {
-      id: "blabla",
-      title: "new todolist",
-      order: 0,
-      addedDate: "",
+  const action = todolistsThunks.addTodolist.fulfilled(
+    {
+      todolist: {
+        id: "blabla",
+        title: "new todolist",
+        order: 0,
+        addedDate: "",
+      },
     },
-  });
+    "requestId",
+    { title: "new todolist" }
+  );
 
   const endState = tasksReducer(startState, action);
 
@@ -168,7 +172,9 @@ test("new array should be added when new todolist is added", () => {
   expect(endState[newKey]).toEqual([]);
 });
 test("propertry with todolistId should be deleted", () => {
-  const action = todolistsActions.removeTodolist({ id: "todolistId2" });
+  const action = todolistsThunks.removeTodolist.fulfilled({ todolistId: "todolistId2" }, "requestId", {
+    todolistId: "todolistId2",
+  });
 
   const endState = tasksReducer(startState, action);
 
@@ -179,12 +185,15 @@ test("propertry with todolistId should be deleted", () => {
 });
 
 test("empty arrays should be added when we set todolists", () => {
-  const action = todolistsActions.setTodolists({
-    todolists: [
-      { id: "1", title: "title 1", order: 0, addedDate: "" },
-      { id: "2", title: "title 2", order: 0, addedDate: "" },
-    ],
-  });
+  const action = todolistsThunks.fetchTodolists.fulfilled(
+    {
+      todolists: [
+        { id: "1", title: "title 1", order: 0, addedDate: "" },
+        { id: "2", title: "title 2", order: 0, addedDate: "" },
+      ],
+    },
+    "requestId"
+  );
 
   const endState = tasksReducer({}, action);
 

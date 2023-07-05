@@ -1,4 +1,4 @@
-import { todolistsActions } from "./todolists-reducer";
+import { todolistsThunks } from "./todolists-reducer";
 import { TaskType, UpdateTaskModelType } from "common/api/types.api";
 import { appActions, setAppStatus } from "app/app-reducer";
 import { handleServerAppError } from "common/utils/handle-server-app-error";
@@ -45,13 +45,13 @@ const slice = createSlice({
           tasks.splice(index, 1);
         }
       })
-      .addCase(todolistsActions.addTodolist, (state, action) => {
+      .addCase(todolistsThunks.addTodolist.fulfilled, (state, action) => {
         state[action.payload.todolist.id] = [];
       })
-      .addCase(todolistsActions.removeTodolist, (state, action) => {
-        delete state[action.payload.id];
+      .addCase(todolistsThunks.removeTodolist.fulfilled, (state, action) => {
+        delete state[action.payload.todolistId];
       })
-      .addCase(todolistsActions.setTodolists, (state, action) => {
+      .addCase(todolistsThunks.fetchTodolists.fulfilled, (state, action) => {
         action.payload.todolists.forEach((tl) => {
           state[tl.id] = [];
         });
@@ -84,7 +84,7 @@ const addTask = createAppAsyncThunk<{ task: TaskType }, { title: string; todolis
     try {
       dispatch(setAppStatus({ status: "loading" }));
       const res = await todolistsAPI.createTask(arg.todolistId, arg.title);
-      if (res.data.resultCode === 0) {
+      if (res.data.resultCode === ResultCode.success) {
         const task = res.data.data.item;
         dispatch(setAppStatus({ status: "succeeded" }));
         return { task };
