@@ -1,11 +1,12 @@
 import { todolistsActions } from "./todolists-reducer";
-import { TaskPriorities, TaskStatuses, TaskType, todolistsAPI, UpdateTaskModelType } from "common/api/todolists-api";
+import { TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType } from "common/api/types";
 import { AppThunk } from "app/store";
 import { appActions, setAppStatus } from "app/app-reducer";
-import { handleServerAppError } from "common/utils/handle-server-network-error";
+import { handleServerAppError } from "common/utils/handle-server-app-error";
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createAppAsyncThunk } from "common/utils/create-app-async-thunk";
-import { handleServerNetworkError } from "common/utils/handle-server-app-error";
+import { handleServerNetworkError } from "common/utils/handle-server-network-error";
+import { todolistsAPI } from "features/TodolistsList/todolists.api";
 
 const slice = createSlice({
   name: "tasks",
@@ -104,7 +105,7 @@ const addTask = createAppAsyncThunk<{ task: TaskType }, { title: string; todolis
 export const removeTaskTC =
   (taskId: string, todolistId: string): AppThunk =>
   (dispatch) => {
-    todolistsAPI.deleteTask(todolistId, taskId).then((res) => {
+    todolistsAPI.deleteTask(todolistId, taskId).then(() => {
       const action = tasksActions.removeTask({ taskId, todolistId });
       dispatch(action);
     });
