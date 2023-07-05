@@ -9,7 +9,6 @@ import {
   todolistsActions,
 } from "./todolists-reducer";
 import { removeTaskTC, tasksThunks } from "./tasks-reducer";
-import { TaskStatuses } from "common/api/types";
 import { Grid, Paper } from "@mui/material";
 import { Todolist } from "./Todolist/Todolist";
 import { Navigate } from "react-router-dom";
@@ -18,6 +17,7 @@ import { selectTodolists } from "features/TodolistsList/todolists-selector";
 import { selectTasks } from "features/TodolistsList/tasks-selector";
 import { selectAuthIsLoggedIn } from "features/Login/auth-selector";
 import { AddItemForm } from "common/components/AddItemForm";
+import { TaskStatuses } from "common/enum";
 
 type PropsType = {
   demo?: boolean;

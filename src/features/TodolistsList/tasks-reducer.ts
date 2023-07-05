@@ -1,5 +1,5 @@
 import { todolistsActions } from "./todolists-reducer";
-import { TaskPriorities, TaskStatuses, TaskType, UpdateTaskModelType } from "common/api/types";
+import { TaskType, UpdateTaskModelType } from "common/api/types.api";
 import { AppThunk } from "app/store";
 import { appActions, setAppStatus } from "app/app-reducer";
 import { handleServerAppError } from "common/utils/handle-server-app-error";
@@ -7,6 +7,7 @@ import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { createAppAsyncThunk } from "common/utils/create-app-async-thunk";
 import { handleServerNetworkError } from "common/utils/handle-server-network-error";
 import { todolistsAPI } from "features/TodolistsList/todolists.api";
+import { TaskPriorities, TaskStatuses } from "common/enum";
 
 const slice = createSlice({
   name: "tasks",

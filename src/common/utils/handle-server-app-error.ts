@@ -1,4 +1,4 @@
-import { ResponseType } from "common/api/types";
+import { ResponseType } from "common/api/types.api";
 import { Dispatch } from "redux";
 import { setAppError, setAppStatus } from "app/app-reducer";
 
